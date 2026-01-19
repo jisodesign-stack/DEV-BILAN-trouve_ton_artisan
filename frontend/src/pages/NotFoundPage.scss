@@ -1,0 +1,70 @@
+// ============================================
+// Styles de la page 404
+// ============================================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.not-found {
+  @include flex-center;
+  flex-direction: column;
+  min-height: 60vh;
+  text-align: center;
+  padding: $spacer-xxl $spacer-md;
+
+  &__image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: $spacer-xl;
+  }
+
+  &__icon {
+    width: 120px;
+    height: 120px;
+    color: $color-gray-300;
+    margin-bottom: $spacer-xl;
+  }
+
+  &__code {
+    font-size: 6rem;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    line-height: 1;
+    margin-bottom: $spacer-md;
+
+    @include media-min(md) {
+      font-size: 8rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    color: $color-dark;
+    margin-bottom: $spacer-md;
+
+    @include media-min(md) {
+      font-size: 2rem;
+    }
+  }
+
+  &__text {
+    font-size: 1rem;
+    color: $color-gray-600;
+    max-width: 500px;
+    margin: 0 auto $spacer-xl;
+    line-height: 1.6;
+  }
+
+  &__link {
+    @include button-primary;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacer-sm;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

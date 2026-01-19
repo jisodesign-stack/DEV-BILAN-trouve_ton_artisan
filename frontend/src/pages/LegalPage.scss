@@ -1,0 +1,53 @@
+// ============================================
+// Styles de la page légale
+// ============================================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.legal-page {
+  padding-bottom: $spacer-xxl;
+
+  &__header {
+    background-color: $color-white;
+    padding: $spacer-xl 0;
+    border-bottom: 1px solid $color-gray-200;
+    margin-bottom: $spacer-xl;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-secondary;
+  }
+
+  &__content {
+    @include card-base;
+    padding: $spacer-xl;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__construction {
+    text-align: center;
+    padding: $spacer-xxl;
+
+    &-icon {
+      width: 80px;
+      height: 80px;
+      color: $color-primary;
+      margin-bottom: $spacer-lg;
+    }
+
+    &-title {
+      font-size: 1.5rem;
+      color: $color-dark;
+      margin-bottom: $spacer-md;
+    }
+
+    &-text {
+      color: $color-gray-600;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+}

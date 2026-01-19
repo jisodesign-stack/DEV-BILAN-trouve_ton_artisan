@@ -1,0 +1,224 @@
+// ============================================
+// Styles de la page d'accueil
+// ============================================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.home {
+  // ===== HERO SECTION =====
+  &__hero {
+    background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+    color: $color-white;
+    padding: $spacer-xxl 0;
+    text-align: center;
+
+    @include media-min(md) {
+      padding: 80px 0;
+    }
+  }
+
+  &__hero-title {
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacer-md;
+    color: $color-white;
+
+    @include media-min(md) {
+      font-size: 2.5rem;
+    }
+
+    @include media-min(lg) {
+      font-size: 3rem;
+    }
+  }
+
+  &__hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include media-min(md) {
+      font-size: 1.25rem;
+    }
+  }
+
+  // ===== SECTION COMMENT ÇA MARCHE =====
+  &__steps {
+    padding: $spacer-xxl 0;
+    background-color: $color-white;
+  }
+
+  &__steps-title {
+    text-align: center;
+    color: $color-secondary;
+    margin-bottom: $spacer-xl;
+
+    @include media-min(md) {
+      margin-bottom: $spacer-xxl;
+    }
+  }
+
+  &__steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacer-lg;
+
+    @include media-min(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-min(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__step {
+    text-align: center;
+    padding: $spacer-lg;
+  }
+
+  &__step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: $color-primary;
+    color: $color-white;
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+    border-radius: 50%;
+    margin-bottom: $spacer-md;
+
+    @include media-min(md) {
+      width: 70px;
+      height: 70px;
+      font-size: 1.75rem;
+    }
+  }
+
+  &__step-title {
+    font-size: 1rem;
+    font-weight: $font-weight-semibold;
+    color: $color-dark;
+    margin-bottom: $spacer-sm;
+
+    @include media-min(md) {
+      font-size: 1.1rem;
+    }
+  }
+
+  &__step-description {
+    font-size: 0.9rem;
+    color: $color-gray-600;
+    margin: 0;
+  }
+
+  // ===== SECTION TOP ARTISANS =====
+  &__top-artisans {
+    padding: $spacer-xxl 0;
+    background-color: $color-light-blue;
+  }
+
+  &__top-artisans-title {
+    text-align: center;
+    color: $color-secondary;
+    margin-bottom: $spacer-xl;
+
+    @include media-min(md) {
+      margin-bottom: $spacer-xxl;
+    }
+  }
+
+  &__top-artisans-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacer-lg;
+
+    @include media-min(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-min(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__top-artisans-empty {
+    text-align: center;
+    padding: $spacer-xl;
+    color: $color-gray-600;
+  }
+
+  // ===== SECTION CATÉGORIES =====
+  &__categories {
+    padding: $spacer-xxl 0;
+    background-color: $color-white;
+  }
+
+  &__categories-title {
+    text-align: center;
+    color: $color-secondary;
+    margin-bottom: $spacer-xl;
+  }
+
+  &__categories-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacer-md;
+
+    @include media-min(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-min(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__category-card {
+    @include card-hover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacer-xl;
+    text-align: center;
+    text-decoration: none;
+    color: $color-dark;
+    background-color: $color-light-blue;
+    border: 2px solid transparent;
+
+    &:hover {
+      text-decoration: none;
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__category-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: $spacer-md;
+    color: $color-primary;
+  }
+
+  &__category-name {
+    font-size: 1.1rem;
+    font-weight: $font-weight-semibold;
+    margin: 0;
+  }
+
+  &__category-count {
+    font-size: 0.875rem;
+    color: $color-gray-600;
+    margin-top: $spacer-xs;
+  }
+}

@@ -1,0 +1,289 @@
+// ============================================
+// Styles de la page fiche artisan
+// ============================================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.artisan-detail {
+  padding-bottom: $spacer-xxl;
+
+  // ===== BREADCRUMB =====
+  &__breadcrumb {
+    padding: $spacer-md 0;
+    background-color: $color-white;
+    border-bottom: 1px solid $color-gray-200;
+    margin-bottom: $spacer-xl;
+
+    &-list {
+      @include list-reset;
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacer-sm;
+      font-size: 0.875rem;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: $spacer-sm;
+
+      &::after {
+        content: '/';
+        color: $color-gray-400;
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+
+    &-link {
+      color: $color-primary;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-current {
+      color: $color-gray-600;
+    }
+  }
+
+  // ===== CONTENU PRINCIPAL =====
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacer-xl;
+
+    @include media-min(lg) {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  // ===== SECTION PRINCIPALE =====
+  &__main {
+    @include card-base;
+    padding: $spacer-xl;
+  }
+
+  // ===== HEADER DE LA FICHE =====
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer-lg;
+    margin-bottom: $spacer-xl;
+    padding-bottom: $spacer-xl;
+    border-bottom: 1px solid $color-gray-200;
+
+    @include media-min(md) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  &__image-wrapper {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    background-color: $color-gray-100;
+
+    @include media-min(md) {
+      width: 150px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    margin: 0 0 $spacer-sm;
+    font-size: 1.5rem;
+    color: $color-dark;
+
+    @include media-min(md) {
+      font-size: 2rem;
+    }
+  }
+
+  &__specialty {
+    margin: 0 0 $spacer-md;
+    font-size: 1.1rem;
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacer-lg;
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: $spacer-sm;
+  }
+
+  &__rating-score {
+    font-size: 1.25rem;
+    font-weight: $font-weight-bold;
+    color: $color-dark;
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: $spacer-xs;
+    color: $color-gray-600;
+
+    svg {
+      color: $color-accent-red;
+    }
+  }
+
+  // ===== SECTION À PROPOS =====
+  &__about {
+    margin-bottom: $spacer-xl;
+
+    &-title {
+      font-size: 1.25rem;
+      color: $color-secondary;
+      margin-bottom: $spacer-md;
+    }
+
+    &-text {
+      color: $color-gray-700;
+      line-height: 1.8;
+    }
+  }
+
+  // ===== LIEN SITE WEB =====
+  &__website {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacer-sm;
+    padding: $spacer-sm $spacer-md;
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary;
+    border-radius: $border-radius;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    transition: $transition-fast;
+
+    &:hover {
+      background-color: $color-primary;
+      color: $color-white;
+      text-decoration: none;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // ===== SIDEBAR =====
+  &__sidebar {
+    @include card-base;
+    padding: $spacer-xl;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+  }
+
+  &__contact-title {
+    font-size: 1.25rem;
+    color: $color-secondary;
+    margin: 0 0 $spacer-lg;
+    padding-bottom: $spacer-md;
+    border-bottom: 2px solid $color-primary;
+  }
+
+  // ===== FORMULAIRE DE CONTACT =====
+  &__form {
+    &-group {
+      margin-bottom: $spacer-md;
+    }
+
+    &-label {
+      display: block;
+      margin-bottom: $spacer-xs;
+      font-weight: $font-weight-medium;
+      font-size: 0.9rem;
+      color: $color-dark;
+
+      .required {
+        color: $color-danger;
+      }
+    }
+
+    &-input,
+    &-textarea {
+      @include input-base;
+    }
+
+    &-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    &-error {
+      color: $color-danger;
+      font-size: 0.8rem;
+      margin-top: $spacer-xs;
+    }
+
+    &-submit {
+      @include button-primary;
+      width: 100%;
+      margin-top: $spacer-md;
+    }
+  }
+
+  // ===== MESSAGE DE SUCCÈS =====
+  &__success {
+    padding: $spacer-lg;
+    background-color: rgba($color-success, 0.1);
+    border: 1px solid $color-success;
+    border-radius: $border-radius;
+    text-align: center;
+
+    &-icon {
+      width: 48px;
+      height: 48px;
+      color: $color-success;
+      margin-bottom: $spacer-md;
+    }
+
+    &-title {
+      font-size: 1.1rem;
+      color: $color-dark;
+      margin-bottom: $spacer-sm;
+    }
+
+    &-text {
+      color: $color-gray-600;
+      margin: 0;
+    }
+  }
+
+  // ===== ÉTAT DE CHARGEMENT =====
+  &__loading,
+  &__error {
+    padding: $spacer-xxl;
+    text-align: center;
+  }
+}

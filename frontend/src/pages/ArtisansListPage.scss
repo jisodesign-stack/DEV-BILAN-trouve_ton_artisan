@@ -1,0 +1,155 @@
+// ============================================
+// Styles de la page liste des artisans
+// ============================================
+
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.artisans-list {
+  // ===== HEADER DE LA PAGE =====
+  &__header {
+    background-color: $color-white;
+    padding: $spacer-xl 0;
+    border-bottom: 1px solid $color-gray-200;
+    margin-bottom: $spacer-xl;
+  }
+
+  &__title {
+    margin: 0 0 $spacer-sm;
+    color: $color-secondary;
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: $color-gray-600;
+    font-size: 1rem;
+  }
+
+  // ===== FILTRES =====
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacer-md;
+    margin-bottom: $spacer-xl;
+    padding: $spacer-lg;
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-sm;
+  }
+
+  &__filter-group {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  &__filter-label {
+    display: block;
+    margin-bottom: $spacer-xs;
+    font-weight: $font-weight-medium;
+    font-size: 0.875rem;
+    color: $color-dark;
+  }
+
+  &__filter-select {
+    @include input-base;
+    cursor: pointer;
+  }
+
+  &__filter-search {
+    flex: 2;
+    min-width: 250px;
+  }
+
+  // ===== RÉSULTATS =====
+  &__results {
+    margin-bottom: $spacer-md;
+    color: $color-gray-600;
+    font-size: 0.9rem;
+  }
+
+  // ===== GRILLE =====
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacer-lg;
+
+    @include media-min(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-min(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-min(xl) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  // ===== ÉTAT VIDE =====
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: $spacer-xxl;
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+
+    &-icon {
+      width: 80px;
+      height: 80px;
+      color: $color-gray-400;
+      margin-bottom: $spacer-lg;
+    }
+
+    &-title {
+      font-size: 1.25rem;
+      color: $color-dark;
+      margin-bottom: $spacer-sm;
+    }
+
+    &-text {
+      color: $color-gray-600;
+      margin-bottom: $spacer-lg;
+    }
+
+    &-link {
+      @include button-primary;
+      display: inline-flex;
+    }
+  }
+
+  // ===== PAGINATION =====
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    gap: $spacer-sm;
+    margin-top: $spacer-xxl;
+  }
+
+  &__pagination-btn {
+    @include button-base;
+    min-width: 44px;
+    height: 44px;
+    padding: $spacer-sm;
+    background-color: $color-white;
+    border: 1px solid $color-gray-300;
+    color: $color-dark;
+
+    &:hover:not(:disabled) {
+      background-color: $color-primary;
+      border-color: $color-primary;
+      color: $color-white;
+    }
+
+    &--active {
+      background-color: $color-primary;
+      border-color: $color-primary;
+      color: $color-white;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
