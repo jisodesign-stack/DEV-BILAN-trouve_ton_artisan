@@ -1,6 +1,7 @@
 /**
- * Composant Footer
- * Pied de page du site avec liens légaux et contact
+ * Footer du site avec liens légaux et contact région
+ * Conforme aux exigences RGPD et accessibilité
+ * 
  * @module components/layout/Footer
  */
 
@@ -8,10 +9,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.scss';
 
-/**
- * Composant Footer présent sur toutes les pages
- * @returns {JSX.Element} Le footer du site
- */
 function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -19,7 +16,6 @@ function Footer() {
     <footer className="footer" role="contentinfo">
       <div className="footer__container">
         <div className="footer__content">
-          {/* Section Logo et Contact */}
           <div className="footer__brand">
             <h2 className="footer__brand-title">Trouve ton artisan !</h2>
             <p className="footer__brand-subtitle">Avec la région Auvergne-Rhône-Alpes</p>
@@ -42,7 +38,6 @@ function Footer() {
             </div>
           </div>
 
-          {/* Section Liens légaux */}
           <nav className="footer__legal" aria-label="Liens légaux">
             <h3 className="footer__legal-title">Informations légales</h3>
             <ul className="footer__legal-list">
@@ -69,7 +64,6 @@ function Footer() {
             </ul>
           </nav>
 
-          {/* Section Région */}
           <div className="footer__region">
             <h3 className="footer__region-title">La région</h3>
             <a 
@@ -84,7 +78,6 @@ function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="footer__bottom">
           <p className="footer__copyright">
             © {currentYear} Région Auvergne-Rhône-Alpes - Tous droits réservés

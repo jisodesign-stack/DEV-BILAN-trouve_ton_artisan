@@ -1,6 +1,7 @@
 /**
- * Point d'entrée pour tous les modèles Sequelize
- * Définition des associations entre les modèles
+ * Point d'entrée des modèles Sequelize
+ * Définit les associations : Catégorie -> Spécialité -> Artisan
+ * 
  * @module models/index
  */
 
@@ -9,12 +10,9 @@ const Categorie = require('./Categorie');
 const Specialite = require('./Specialite');
 const Artisan = require('./Artisan');
 
-// ===== DÉFINITION DES ASSOCIATIONS =====
+/* === ASSOCIATIONS === */
 
-/**
- * Une catégorie possède plusieurs spécialités
- * Une spécialité appartient à une seule catégorie
- */
+// Catégorie (1) --- (N) Spécialité
 Categorie.hasMany(Specialite, {
   foreignKey: 'categorie_id',
   as: 'specialites',
@@ -27,10 +25,7 @@ Specialite.belongsTo(Categorie, {
   as: 'categorie'
 });
 
-/**
- * Une spécialité possède plusieurs artisans
- * Un artisan appartient à une seule spécialité
- */
+// Spécialité (1) --- (N) Artisan
 Specialite.hasMany(Artisan, {
   foreignKey: 'specialite_id',
   as: 'artisans',

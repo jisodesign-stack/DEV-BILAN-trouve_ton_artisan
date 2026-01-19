@@ -1,6 +1,7 @@
 /**
- * Composant Header
- * En-tête du site avec navigation dynamique et recherche
+ * Header du site avec navigation dynamique et recherche
+ * Menu responsive avec support mobile et accessibilité WCAG
+ * 
  * @module components/layout/Header
  */
 
@@ -10,22 +11,12 @@ import { FiSearch, FiMenu, FiX } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 import './Header.scss';
 
-/**
- * Composant Header avec menu dynamique alimenté par la BDD
- * @param {Object} props - Propriétés du composant
- * @param {Array} props.categories - Liste des catégories depuis la BDD
- * @param {boolean} props.loading - État de chargement
- * @returns {JSX.Element} Le header du site
- */
 function Header({ categories = [], loading = false }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  /**
-   * Gère la soumission du formulaire de recherche
-   * @param {Event} e - Événement de soumission
-   */
+  /** Soumet la recherche (min. 2 caractères) */
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim().length >= 2) {
@@ -35,17 +26,11 @@ function Header({ categories = [], loading = false }) {
     }
   };
 
-  /**
-   * Ferme le menu mobile
-   */
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <header className="header" role="banner">
       <div className="header__container">
-        {/* Logo */}
         <Link to="/" className="header__logo" aria-label="Retour à l'accueil">
           <img 
             src="/images/logo.png" 
@@ -59,7 +44,6 @@ function Header({ categories = [], loading = false }) {
           </div>
         </Link>
 
-        {/* Navigation desktop */}
         <nav className="header__nav" aria-label="Navigation principale">
           <ul className="header__nav-list">
             {loading ? (
@@ -83,7 +67,6 @@ function Header({ categories = [], loading = false }) {
           </ul>
         </nav>
 
-        {/* Barre de recherche */}
         <div className="header__search">
           <form 
             className="header__search-form" 
@@ -116,7 +99,6 @@ function Header({ categories = [], loading = false }) {
           </form>
         </div>
 
-        {/* Bouton menu mobile */}
         <button
           className="header__mobile-toggle"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -131,7 +113,6 @@ function Header({ categories = [], loading = false }) {
           )}
         </button>
 
-        {/* Navigation mobile */}
         <nav
           id="mobile-nav"
           className={`header__mobile-nav ${mobileMenuOpen ? 'header__mobile-nav--open' : ''}`}

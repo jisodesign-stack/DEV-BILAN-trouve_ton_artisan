@@ -1,5 +1,7 @@
 /**
  * Contrôleur pour la gestion des artisans
+ * Gère les opérations CRUD et la recherche d'artisans
+ * 
  * @module controllers/artisanController
  */
 
@@ -8,23 +10,22 @@ const { Op } = require('sequelize');
 const xss = require('xss');
 
 /**
- * Récupère tous les artisans avec pagination et filtres
+ * Récupère tous les artisans avec pagination et filtres optionnels
+ * 
  * @route GET /api/artisans
+ * @query {number} page - Numéro de page (défaut: 1)
+ * @query {number} limit - Nombre par page (défaut: 12)
+ * @query {string} categorie - Slug de catégorie pour filtrer
+ * @query {string} search - Recherche par nom
  */
 exports.getAllArtisans = async (req, res) => {
   try {
-    // Pagination
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 12;
     const offset = (page - 1) * limit;
-
-    // Filtre par catégorie
     const categorieSlug = req.query.categorie ? xss(req.query.categorie) : null;
-    
-    // Recherche par nom
     const search = req.query.search ? xss(req.query.search) : null;
 
-    // Construction des conditions de recherche
     let whereClause = {};
     let includeClause = [{
       model: Specialite,
@@ -37,14 +38,12 @@ exports.getAllArtisans = async (req, res) => {
       }]
     }];
 
-    // Filtre par nom
     if (search) {
       whereClause.nom = {
         [Op.like]: `%${search}%`
       };
     }
 
-    // Filtre par catégorie
     if (categorieSlug) {
       includeClause[0].include[0].where = { slug: categorieSlug };
       includeClause[0].include[0].required = true;
@@ -77,8 +76,11 @@ exports.getAllArtisans = async (req, res) => {
 };
 
 /**
- * Récupère un artisan par son ID
+ * Récupère un artisan par son ID avec sa spécialité et catégorie
+ * 
  * @route GET /api/artisans/:id
+ * @param {number} id - ID de l'artisan
+ * @returns {Object} Données complètes de l'artisan
  */
 exports.getArtisanById = async (req, res) => {
   try {
@@ -125,8 +127,11 @@ exports.getArtisanById = async (req, res) => {
 };
 
 /**
- * Récupère les 3 artisans du mois (top_artisan = true)
+ * Récupère les 3 artisans du mois (affichés sur la page d'accueil)
+ * Sélectionne les artisans ayant top_artisan = true
+ * 
  * @route GET /api/artisans/top
+ * @returns {Array} Les 3 artisans mis en avant
  */
 exports.getTopArtisans = async (req, res) => {
   try {
@@ -161,8 +166,12 @@ exports.getTopArtisans = async (req, res) => {
 };
 
 /**
- * Recherche des artisans par nom
- * @route GET /api/artisans/search
+ * Recherche des artisans par nom (minimum 2 caractères)
+ * Utilisé par la barre de recherche du header
+ * 
+ * @route GET /api/artisans/search?q={query}
+ * @query {string} q - Terme de recherche (min. 2 caractères)
+ * @returns {Array} Artisans correspondants (max. 20)
  */
 exports.searchArtisans = async (req, res) => {
   try {

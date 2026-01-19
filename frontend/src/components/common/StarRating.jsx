@@ -11,13 +11,11 @@ import './StarRating.scss';
 
 /**
  * Composant d'affichage de notation par étoiles
- * @param {Object} props - Propriétés du composant
- * @param {number} props.rating - Note sur 5
- * @param {string} props.size - Taille des étoiles (sm, md, lg)
- * @param {boolean} props.showScore - Afficher le score numérique
- * @returns {JSX.Element} Étoiles de notation
+ * @param {number} rating - Note sur 5
+ * @param {string} size - Taille des étoiles (sm, md, lg)
+ * @param {boolean} showScore - Afficher le score numérique
  */
-function StarRating({ rating, size, showScore }) {
+function StarRating({ rating, size = 'md', showScore = false }) {
   const stars = [];
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 >= 0.5;
@@ -70,11 +68,6 @@ StarRating.propTypes = {
   rating: PropTypes.number.isRequired,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   showScore: PropTypes.bool
-};
-
-StarRating.defaultProps = {
-  size: 'md',
-  showScore: false
 };
 
 export default StarRating;

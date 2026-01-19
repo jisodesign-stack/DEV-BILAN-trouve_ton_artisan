@@ -1,6 +1,8 @@
 /**
- * Modèle Sequelize pour la table Categorie
- * Une catégorie regroupe plusieurs spécialités d'artisans
+ * Modèle Catégorie
+ * 4 catégories principales : Bâtiment, Services, Fabrication, Alimentation
+ * Relation : possède plusieurs Spécialités (1:N)
+ * 
  * @module models/Categorie
  */
 

@@ -1,6 +1,8 @@
 /**
- * Modèle Sequelize pour la table Specialite
- * Une spécialité appartient à une seule catégorie
+ * Modèle Spécialité
+ * Métier précis d'un artisan (ex: Menuisier, Boulanger)
+ * Relations : appartient à une Catégorie (N:1), possède des Artisans (1:N)
+ * 
  * @module models/Specialite
  */
 

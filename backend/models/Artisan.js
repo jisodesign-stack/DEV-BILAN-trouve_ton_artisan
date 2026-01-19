@@ -1,6 +1,8 @@
 /**
- * Modèle Sequelize pour la table Artisan
- * Un artisan possède une seule spécialité
+ * Modèle Artisan
+ * Représente un artisan de la région Auvergne-Rhône-Alpes
+ * Relation : appartient à une Spécialité (N:1)
+ * 
  * @module models/Artisan
  */
 

@@ -1,12 +1,13 @@
 /**
- * Service API pour les requêtes HTTP
- * Gère la communication avec le backend
+ * Service API - Communication avec le backend
+ * Centralise toutes les requêtes HTTP vers l'API REST
+ * 
  * @module services/api
  */
 
 import axios from 'axios';
 
-// Configuration de base d'axios
+// Instance Axios préconfigurée avec l'URL de base et l'authentification
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
   timeout: 10000,
@@ -16,11 +17,10 @@ const api = axios.create({
   }
 });
 
-// Intercepteur pour les réponses
+// Intercepteur de réponse pour la gestion centralisée des erreurs
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Gestion centralisée des erreurs (logging uniquement en développement)
     if (process.env.NODE_ENV === 'development') {
       if (error.response) {
         console.error('Erreur API:', error.response.data.message || error.response.statusText);
@@ -34,7 +34,7 @@ api.interceptors.response.use(
   }
 );
 
-// ===== SERVICES CATÉGORIES =====
+/* === CATÉGORIES === */
 
 /**
  * Récupère toutes les catégories
@@ -81,46 +81,29 @@ export const getArtisans = async (params = {}) => {
   return response.data;
 };
 
-/**
- * Récupère un artisan par son ID
- * @param {number} id - ID de l'artisan
- * @returns {Promise} Détails de l'artisan
- */
+/** Récupère un artisan par son ID */
 export const getArtisanById = async (id) => {
   const response = await api.get(`/artisans/${id}`);
   return response.data;
 };
 
-/**
- * Récupère les 3 artisans du mois
- * @returns {Promise} Liste des top artisans
- */
+/** Récupère les 3 artisans mis en avant sur la page d'accueil */
 export const getTopArtisans = async () => {
   const response = await api.get('/artisans/top');
   return response.data;
 };
 
-/**
- * Recherche des artisans par nom
- * @param {string} query - Terme de recherche
- * @returns {Promise} Liste des artisans correspondants
- */
+/** Recherche des artisans par nom (min. 2 caractères) */
 export const searchArtisans = async (query) => {
   const response = await api.get('/artisans/search', { params: { q: query } });
   return response.data;
 };
 
-// ===== SERVICE CONTACT =====
+/* === CONTACT === */
 
 /**
  * Envoie un email de contact à un artisan
- * @param {Object} data - Données du formulaire
- * @param {number} data.artisan_id - ID de l'artisan
- * @param {string} data.nom - Nom de l'expéditeur
- * @param {string} data.email - Email de l'expéditeur
- * @param {string} data.objet - Objet du message
- * @param {string} data.message - Contenu du message
- * @returns {Promise} Résultat de l'envoi
+ * @param {Object} data - {artisan_id, nom, email, objet, message}
  */
 export const sendContactEmail = async (data) => {
   const response = await api.post('/contact', data);
