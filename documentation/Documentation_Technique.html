@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Technique - Trouve ton artisan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+            background: white;
+        }
+        
+        @media print {
+            body {
+                padding: 15mm;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #0074c7;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #0074c7;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #00497c;
+            font-size: 1.3em;
+            font-style: italic;
+        }
+        
+        .header .region {
+            color: #82b864;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        
+        /* Sections */
+        h2 {
+            color: #0074c7;
+            font-size: 1.6em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #0074c7;
+        }
+        
+        h3 {
+            color: #00497c;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        h4 {
+            color: #384050;
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #0074c7;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f1f8fc;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 10px 0 15px 25px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        /* Code */
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.85em;
+        }
+        
+        /* Info boxes */
+        .info-box {
+            background-color: #f1f8fc;
+            border-left: 4px solid #0074c7;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .success-box {
+            background-color: #d4edda;
+            border-left: 4px solid #82b864;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #0074c7;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        /* Cover page */
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover h1 {
+            font-size: 3em;
+            color: #0074c7;
+            margin-bottom: 20px;
+        }
+        
+        .cover .logo {
+            font-size: 5em;
+            margin-bottom: 30px;
+        }
+        
+        /* TOC */
+        .toc {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc li {
+            padding: 5px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+        
+        .toc a {
+            color: #0074c7;
+            text-decoration: none;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        
+        .badge-blue { background: #0074c7; color: white; }
+        .badge-green { background: #82b864; color: white; }
+        .badge-orange { background: #ffc107; color: #333; }
+    </style>
+</head>
+<body>
+
+    <!-- Page de garde -->
+    <div class="cover">
+        <div class="logo"></div>
+        <h1>Trouve ton artisan</h1>
+        <p class="subtitle" style="font-size: 1.5em; color: #00497c; margin: 20px 0;">Documentation Technique</p>
+        <p class="region" style="font-size: 1.2em; color: #82b864;">Région Auvergne-Rhône-Alpes</p>
+        <div style="margin-top: 50px; color: #666;">
+            <p><strong>Version :</strong> 1.0.0</p>
+            <p><strong>Date :</strong> Janvier 2026</p>
+            <p><strong>Auteur :</strong> Développeur Web</p>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Table des matières -->
+    <h2>Table des matières</h2>
+    <div class="toc">
+        <ul>
+            <li><a href="#presentation">1. Présentation du projet</a></li>
+            <li><a href="#objectifs">2. Objectifs et fonctionnalités</a></li>
+            <li><a href="#technologies">3. Technologies utilisées</a></li>
+            <li><a href="#architecture">4. Architecture du projet</a></li>
+            <li><a href="#bdd">5. Base de données</a></li>
+            <li><a href="#api">6. Documentation API</a></li>
+            <li><a href="#installation">7. Guide d'installation</a></li>
+            <li><a href="#securite">8. Sécurité</a></li>
+            <li><a href="#accessibilite">9. Accessibilité</a></li>
+            <li><a href="#deploiement">10. Déploiement</a></li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 1. Présentation -->
+    <h2 id="presentation">1. Présentation du projet</h2>
+    
+    <p>
+        <strong>Trouve ton artisan</strong> est une plateforme web développée pour la région Auvergne-Rhône-Alpes 
+        permettant aux particuliers de trouver et contacter des artisans qualifiés dans leur région.
+    </p>
+    
+    <div class="info-box">
+        <strong>Mission :</strong> Créer une interface intuitive et accessible permettant de mettre en relation 
+        les particuliers avec les artisans de la région, classés par catégories et spécialités.
+    </div>
+    
+    <h3>Contexte</h3>
+    <p>
+        La région Auvergne-Rhône-Alpes souhaite valoriser le savoir-faire de ses artisans locaux en offrant 
+        une plateforme moderne et accessible à tous. Ce projet s'inscrit dans une démarche de digitalisation 
+        des services régionaux et de soutien à l'économie locale.
+    </p>
+    
+    <h3>Public cible</h3>
+    <ul>
+        <li><strong>Particuliers</strong> : recherche d'artisans pour des travaux, services ou achats</li>
+        <li><strong>Artisans</strong> : visibilité accrue auprès des habitants de la région</li>
+        <li><strong>Région</strong> : mise en valeur du tissu économique local</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- 2. Objectifs et fonctionnalités -->
+    <h2 id="objectifs">2. Objectifs et fonctionnalités</h2>
+    
+    <h3>Objectifs principaux</h3>
+    <ol>
+        <li>Permettre aux particuliers de rechercher un artisan par catégorie ou par nom</li>
+        <li>Consulter une fiche artisan détaillée avec note, spécialité et localisation</li>
+        <li>Contacter l'artisan via un formulaire sécurisé</li>
+        <li>Garantir une accessibilité conforme aux normes WCAG 2.1</li>
+        <li>Assurer un design responsive (Mobile First)</li>
+    </ol>
+    
+    <h3>Fonctionnalités implémentées</h3>
+    
+    <h4>Frontend</h4>
+    <table>
+        <tr>
+            <th>Fonctionnalité</th>
+            <th>Description</th>
+            <th>Statut</th>
+        </tr>
+        <tr>
+            <td>Page d'accueil</td>
+            <td>Présentation du service avec section "Comment trouver mon artisan"</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Artisans du mois</td>
+            <td>Affichage des 3 artisans mis en avant (Top artisans)</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Navigation par catégories</td>
+            <td>4 catégories : Bâtiment, Services, Fabrication, Alimentation</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Recherche</td>
+            <td>Recherche d'artisans par nom</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Fiches artisans</td>
+            <td>Page détaillée avec notation par étoiles, contact, site web</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Formulaire de contact</td>
+            <td>Envoi d'email sécurisé à l'artisan</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Page 404</td>
+            <td>Page d'erreur personnalisée</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Mentions légales</td>
+            <td>Page des mentions légales et CGU</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+    </table>
+    
+    <h4>Backend</h4>
+    <table>
+        <tr>
+            <th>Fonctionnalité</th>
+            <th>Description</th>
+            <th>Statut</th>
+        </tr>
+        <tr>
+            <td>API REST</td>
+            <td>Endpoints pour catégories, artisans et contact</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Authentification API</td>
+            <td>Protection par clé API</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Validation</td>
+            <td>Validation des entrées avec express-validator</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Envoi d'emails</td>
+            <td>Nodemailer avec support SMTP</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+        <tr>
+            <td>Sécurité</td>
+            <td>Helmet, CORS, Rate limiting, XSS protection</td>
+            <td><span class="badge badge-green">✓ Fait</span></td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- 3. Technologies -->
+    <h2 id="technologies">3. Technologies utilisées</h2>
+    
+    <h3>Stack Frontend</h3>
+    <table>
+        <tr>
+            <th>Technologie</th>
+            <th>Version</th>
+            <th>Rôle</th>
+        </tr>
+        <tr>
+            <td>React.js</td>
+            <td>18.2</td>
+            <td>Bibliothèque JavaScript pour l'interface utilisateur</td>
+        </tr>
+        <tr>
+            <td>React Router</td>
+            <td>6.x</td>
+            <td>Routage côté client (SPA)</td>
+        </tr>
+        <tr>
+            <td>Bootstrap</td>
+            <td>5.3</td>
+            <td>Framework CSS responsive</td>
+        </tr>
+        <tr>
+            <td>Sass/SCSS</td>
+            <td>1.69</td>
+            <td>Préprocesseur CSS</td>
+        </tr>
+        <tr>
+            <td>Axios</td>
+            <td>1.6</td>
+            <td>Client HTTP pour les requêtes API</td>
+        </tr>
+        <tr>
+            <td>React Helmet Async</td>
+            <td>2.0</td>
+            <td>Gestion du SEO (meta tags)</td>
+        </tr>
+        <tr>
+            <td>React Icons</td>
+            <td>5.0</td>
+            <td>Bibliothèque d'icônes</td>
+        </tr>
+    </table>
+    
+    <h3>Stack Backend</h3>
+    <table>
+        <tr>
+            <th>Technologie</th>
+            <th>Version</th>
+            <th>Rôle</th>
+        </tr>
+        <tr>
+            <td>Node.js</td>
+            <td>18+</td>
+            <td>Runtime JavaScript côté serveur</td>
+        </tr>
+        <tr>
+            <td>Express.js</td>
+            <td>4.18</td>
+            <td>Framework web minimaliste</td>
+        </tr>
+        <tr>
+            <td>Sequelize</td>
+            <td>6.35</td>
+            <td>ORM pour MySQL</td>
+        </tr>
+        <tr>
+            <td>MySQL</td>
+            <td>8.0+</td>
+            <td>Base de données relationnelle</td>
+        </tr>
+        <tr>
+            <td>Nodemailer</td>
+            <td>6.9</td>
+            <td>Envoi d'emails SMTP</td>
+        </tr>
+        <tr>
+            <td>Helmet</td>
+            <td>7.1</td>
+            <td>Sécurisation des headers HTTP</td>
+        </tr>
+        <tr>
+            <td>express-rate-limit</td>
+            <td>7.1</td>
+            <td>Protection contre les attaques par force brute</td>
+        </tr>
+        <tr>
+            <td>express-validator</td>
+            <td>7.0</td>
+            <td>Validation des entrées</td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- 4. Architecture -->
+    <h2 id="architecture">4. Architecture du projet</h2>
+    
+    <h3>Architecture globale</h3>
+    <div class="info-box">
+        <p>Le projet suit une architecture <strong>Client-Serveur</strong> classique avec séparation claire entre le frontend (React) et le backend (Node.js/Express).</p>
+    </div>
+    
+    <pre>
+┌─────────────────┐     HTTP/REST     ┌─────────────────┐     SQL      ┌─────────────────┐
+│                 │ ◄──────────────► │                 │ ◄──────────► │                 │
+│  Frontend       │                   │  Backend        │              │  MySQL          │
+│  React.js       │                   │  Express.js     │              │  Database       │
+│  Port 3001      │                   │  Port 5000      │              │  Port 3306      │
+│                 │                   │                 │              │                 │
+└─────────────────┘                   └─────────────────┘              └─────────────────┘
+    </pre>
+    
+    <h3>Structure des dossiers</h3>
+    
+    <h4>Backend</h4>
+    <pre>
+backend/
+├── config/
+│   └── database.js          # Configuration Sequelize/MySQL
+├── controllers/
+│   ├── artisanController.js # Logique métier artisans
+│   ├── categorieController.js # Logique métier catégories
+│   └── contactController.js # Logique envoi emails
+├── middleware/
+│   ├── apiKeyAuth.js        # Authentification par clé API
+│   └── validateRequest.js   # Validation des requêtes
+├── models/
+│   ├── index.js             # Export des modèles
+│   ├── Artisan.js           # Modèle Artisan
+│   ├── Categorie.js         # Modèle Catégorie
+│   └── Specialite.js        # Modèle Spécialité
+├── routes/
+│   ├── artisanRoutes.js     # Routes /api/artisans
+│   ├── categorieRoutes.js   # Routes /api/categories
+│   └── contactRoutes.js     # Routes /api/contact
+├── scripts/
+│   └── sql/
+│       ├── create_database.sql  # Création BDD
+│       └── seed_database.sql    # Données initiales
+├── .env                     # Variables d'environnement
+├── package.json
+└── server.js                # Point d'entrée
+    </pre>
+    
+    <h4>Frontend</h4>
+    <pre>
+frontend/
+├── public/
+│   ├── index.html           # Template HTML
+│   ├── manifest.json        # PWA manifest
+│   └── favicon.ico          # Favicon
+├── src/
+│   ├── components/
+│   │   ├── common/          # Composants réutilisables
+│   │   │   ├── ArtisanCard.jsx
+│   │   │   ├── Loader.jsx
+│   │   │   └── StarRating.jsx
+│   │   └── layout/          # Composants de mise en page
+│   │       ├── Header.jsx
+│   │       └── Footer.jsx
+│   ├── pages/
+│   │   ├── HomePage.jsx
+│   │   ├── ArtisansListPage.jsx
+│   │   ├── ArtisanDetailPage.jsx
+│   │   ├── LegalPage.jsx
+│   │   └── NotFoundPage.jsx
+│   ├── services/
+│   │   └── api.js           # Client Axios
+│   ├── styles/
+│   │   ├── _variables.scss  # Variables SCSS
+│   │   ├── _mixins.scss     # Mixins SCSS
+│   │   └── global.scss      # Styles globaux
+│   ├── App.js               # Composant principal
+│   └── index.js             # Point d'entrée
+├── .env
+└── package.json
+    </pre>
+
+    <div class="page-break"></div>
+
+    <!-- 5. Base de données -->
+    <h2 id="bdd">5. Base de données</h2>
+    
+    <h3>5.1 Modèle Conceptuel de Données (MCD)</h3>
+    
+    <div class="info-box">
+        <strong>MCD :</strong> Représentation conceptuelle des entités et de leurs associations, 
+        indépendante de toute considération technique d'implémentation.
+    </div>
+    
+    <div style="text-align: center; margin: 30px 0; padding: 20px; background: #f9f9f9; border-radius: 10px;">
+        <pre style="background: white; display: inline-block; padding: 30px; text-align: left; font-size: 14px;">
+╔═══════════════════╗                    ╔═══════════════════╗                    ╔═══════════════════╗
+║                   ║                    ║                   ║                    ║                   ║
+║    CATEGORIE      ║                    ║   SPECIALITE      ║                    ║     ARTISAN       ║
+║                   ║                    ║                   ║                    ║                   ║
+║  - nom            ║      CONTIENT      ║  - nom            ║     EXERCE         ║  - nom            ║
+║  - slug           ║◄──────────────────►║                   ║◄──────────────────►║  - email          ║
+║                   ║       (1,N)        ║                   ║       (1,N)        ║  - note           ║
+║                   ║                    ║                   ║                    ║  - localisation   ║
+╚═══════════════════╝                    ╚═══════════════════╝                    ║  - a_propos       ║
+                                                                                  ║  - site_web       ║
+                                                                                  ║  - image          ║
+                                                                                  ║  - top_artisan    ║
+                                                                                  ║                   ║
+                                                                                  ╚═══════════════════╝
+        </pre>
+    </div>
+    
+    <h4>Règles de gestion</h4>
+    <ul>
+        <li><strong>RG1 :</strong> Une catégorie contient une ou plusieurs spécialités</li>
+        <li><strong>RG2 :</strong> Une spécialité appartient à une seule catégorie</li>
+        <li><strong>RG3 :</strong> Un artisan exerce une seule spécialité</li>
+        <li><strong>RG4 :</strong> Une spécialité peut être exercée par plusieurs artisans</li>
+        <li><strong>RG5 :</strong> Un artisan peut être désigné "Top artisan" du mois</li>
+        <li><strong>RG6 :</strong> La note d'un artisan est comprise entre 0 et 5</li>
+    </ul>
+    
+    <h4>Dictionnaire des données</h4>
+    <table>
+        <tr>
+            <th>Donnée</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Contrainte</th>
+        </tr>
+        <tr><td>nom_categorie</td><td>Nom de la catégorie</td><td>Alphabétique</td><td>Obligatoire, Unique</td></tr>
+        <tr><td>slug_categorie</td><td>URL-friendly du nom</td><td>Alphabétique</td><td>Obligatoire, Unique</td></tr>
+        <tr><td>nom_specialite</td><td>Nom de la spécialité</td><td>Alphabétique</td><td>Obligatoire</td></tr>
+        <tr><td>nom_artisan</td><td>Nom de l'artisan/entreprise</td><td>Alphabétique</td><td>Obligatoire</td></tr>
+        <tr><td>email_artisan</td><td>Email de contact</td><td>Email</td><td>Obligatoire, Unique</td></tr>
+        <tr><td>note_artisan</td><td>Note moyenne</td><td>Décimal (0-5)</td><td>Obligatoire</td></tr>
+        <tr><td>localisation</td><td>Ville de l'artisan</td><td>Alphabétique</td><td>Obligatoire</td></tr>
+        <tr><td>a_propos</td><td>Description de l'artisan</td><td>Texte long</td><td>Facultatif</td></tr>
+        <tr><td>site_web</td><td>URL du site internet</td><td>URL</td><td>Facultatif</td></tr>
+        <tr><td>image</td><td>Photo de l'artisan</td><td>Fichier</td><td>Facultatif</td></tr>
+        <tr><td>top_artisan</td><td>Artisan mis en avant</td><td>Booléen</td><td>Obligatoire (défaut: false)</td></tr>
+    </table>
+
+    <div class="page-break"></div>
+    
+    <h3>5.2 Modèle Logique de Données (MLD)</h3>
+    
+    <div class="info-box">
+        <strong>MLD :</strong> Traduction du MCD en schéma relationnel avec les clés primaires (PK), 
+        clés étrangères (FK) et les types de données.
+    </div>
+    
+    <div style="text-align: center; margin: 30px 0; padding: 20px; background: #f9f9f9; border-radius: 10px;">
+        <pre style="background: white; display: inline-block; padding: 30px; text-align: left; font-size: 13px;">
+┌────────────────────────────────────────┐
+│              CATEGORIES                │
+├────────────────────────────────────────┤
+│ [PK] id        INT          PK, AI     │
+│    nom         VARCHAR(100) NOT NULL   │
+│    slug        VARCHAR(100) NOT NULL   │
+│    created_at  TIMESTAMP    DEFAULT    │
+│    updated_at  TIMESTAMP    DEFAULT    │
+└────────────────────────────────────────┘
+                    │
+                    │ 1:N
+                    ▼
+┌────────────────────────────────────────┐
+│              SPECIALITES               │
+├────────────────────────────────────────┤
+│ [PK] id         INT          PK, AI    │
+│    nom          VARCHAR(100) NOT NULL  │
+│ [FK] categorie_id INT        FK → categories(id)
+│    created_at   TIMESTAMP    DEFAULT   │
+│    updated_at   TIMESTAMP    DEFAULT   │
+└────────────────────────────────────────┘
+                    │
+                    │ 1:N
+                    ▼
+┌────────────────────────────────────────┐
+│               ARTISANS                 │
+├────────────────────────────────────────┤
+│ [PK] id          INT          PK, AI   │
+│    nom           VARCHAR(100) NOT NULL │
+│    email         VARCHAR(255) UNIQUE   │
+│    note          DECIMAL(2,1) CHECK    │
+│    localisation  VARCHAR(100) NOT NULL │
+│    a_propos      TEXT         NULL     │
+│    site_web      VARCHAR(255) NULL     │
+│    image         VARCHAR(255) DEFAULT  │
+│    top_artisan   BOOLEAN      DEFAULT  │
+│ [FK] specialite_id INT        FK → specialites(id)
+│    created_at    TIMESTAMP    DEFAULT  │
+│    updated_at    TIMESTAMP    DEFAULT  │
+└────────────────────────────────────────┘
+
+Légende : [PK] Clé Primaire | [FK] Clé Étrangère | AI = Auto Increment
+        </pre>
+    </div>
+    
+    <h4>Notation textuelle du MLD</h4>
+    <div style="background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 5px; font-family: monospace;">
+        <p><strong style="color: #82b864;">CATEGORIES</strong> (<u>id</u>, nom, slug, created_at, updated_at)</p>
+        <p><strong style="color: #82b864;">SPECIALITES</strong> (<u>id</u>, nom, #categorie_id, created_at, updated_at)</p>
+        <p><strong style="color: #82b864;">ARTISANS</strong> (<u>id</u>, nom, email, note, localisation, a_propos, site_web, image, top_artisan, #specialite_id, created_at, updated_at)</p>
+        <p style="color: #aaa; margin-top: 15px; font-size: 0.9em;">
+            <u>souligné</u> = clé primaire | # = clé étrangère
+        </p>
+    </div>
+
+    <div class="page-break"></div>
+    
+    <h3>5.3 Modèle Physique de Données (MPD)</h3>
+    
+    <h4>Script SQL de création</h4>
+    <pre>
+-- Table CATEGORIES
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL UNIQUE,
+    slug VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_slug (slug)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table SPECIALITES
+CREATE TABLE specialites (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    categorie_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_categorie (categorie_id),
+    CONSTRAINT fk_specialite_categorie 
+        FOREIGN KEY (categorie_id) REFERENCES categories(id) 
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table ARTISANS
+CREATE TABLE artisans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    note DECIMAL(2,1) NOT NULL DEFAULT 0 CHECK (note >= 0 AND note <= 5),
+    localisation VARCHAR(100) NOT NULL,
+    a_propos TEXT,
+    site_web VARCHAR(255),
+    image VARCHAR(255) DEFAULT 'default-artisan.jpg',
+    top_artisan BOOLEAN NOT NULL DEFAULT FALSE,
+    specialite_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_specialite (specialite_id),
+    INDEX idx_nom (nom),
+    INDEX idx_note (note DESC),
+    INDEX idx_top_artisan (top_artisan),
+    CONSTRAINT fk_artisan_specialite 
+        FOREIGN KEY (specialite_id) REFERENCES specialites(id) 
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    </pre>
+    
+    <h3>5.4 Description des tables</h3>
+    
+    <h4>Table : categories</h4>
+    <table>
+        <tr>
+            <th>Colonne</th>
+            <th>Type</th>
+            <th>Contraintes</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+            <td>PRIMARY KEY, AUTO_INCREMENT</td>
+            <td>Identifiant unique</td>
+        </tr>
+        <tr>
+            <td>nom</td>
+            <td>VARCHAR(100)</td>
+            <td>NOT NULL, UNIQUE</td>
+            <td>Nom de la catégorie</td>
+        </tr>
+        <tr>
+            <td>slug</td>
+            <td>VARCHAR(100)</td>
+            <td>NOT NULL, UNIQUE</td>
+            <td>Slug pour l'URL</td>
+        </tr>
+    </table>
+    
+    <h4>Table : specialites</h4>
+    <table>
+        <tr>
+            <th>Colonne</th>
+            <th>Type</th>
+            <th>Contraintes</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+            <td>PRIMARY KEY, AUTO_INCREMENT</td>
+            <td>Identifiant unique</td>
+        </tr>
+        <tr>
+            <td>nom</td>
+            <td>VARCHAR(100)</td>
+            <td>NOT NULL</td>
+            <td>Nom de la spécialité</td>
+        </tr>
+        <tr>
+            <td>categorie_id</td>
+            <td>INT</td>
+            <td>FOREIGN KEY</td>
+            <td>Référence vers categories</td>
+        </tr>
+    </table>
+    
+    <h4>Table : artisans</h4>
+    <table>
+        <tr>
+            <th>Colonne</th>
+            <th>Type</th>
+            <th>Contraintes</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+            <td>PRIMARY KEY, AUTO_INCREMENT</td>
+            <td>Identifiant unique</td>
+        </tr>
+        <tr>
+            <td>nom</td>
+            <td>VARCHAR(255)</td>
+            <td>NOT NULL</td>
+            <td>Nom de l'artisan</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR(255)</td>
+            <td>NOT NULL</td>
+            <td>Email de contact</td>
+        </tr>
+        <tr>
+            <td>note</td>
+            <td>DECIMAL(2,1)</td>
+            <td>DEFAULT 0</td>
+            <td>Note moyenne (0-5)</td>
+        </tr>
+        <tr>
+            <td>localisation</td>
+            <td>VARCHAR(255)</td>
+            <td>NOT NULL</td>
+            <td>Ville</td>
+        </tr>
+        <tr>
+            <td>a_propos</td>
+            <td>TEXT</td>
+            <td>-</td>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td>site_web</td>
+            <td>VARCHAR(255)</td>
+            <td>-</td>
+            <td>URL du site web</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>VARCHAR(255)</td>
+            <td>-</td>
+            <td>Photo de l'artisan</td>
+        </tr>
+        <tr>
+            <td>top_artisan</td>
+            <td>BOOLEAN</td>
+            <td>DEFAULT FALSE</td>
+            <td>Artisan du mois</td>
+        </tr>
+        <tr>
+            <td>specialite_id</td>
+            <td>INT</td>
+            <td>FOREIGN KEY</td>
+            <td>Référence vers specialites</td>
+        </tr>
+    </table>
+    
+    <h3>Données initiales</h3>
+    
+    <h4>Catégories (4)</h4>
+    <ul>
+        <li>Bâtiment</li>
+        <li>Services</li>
+        <li>Fabrication</li>
+        <li>Alimentation</li>
+    </ul>
+    
+    <h4>Artisans (17)</h4>
+    <p>Dont 3 Top artisans mis en avant sur la page d'accueil :</p>
+    <ul>
+        <li>Au pain chaud (Boulanger) - Montélimar - Note : 4.8</li>
+        <li>Chocolaterie Labbé (Chocolatier) - Lyon - Note : 4.9</li>
+        <li>Orville Salmons (Chauffagiste) - Evian - Note : 5.0</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- 6. API Documentation -->
+    <h2 id="api">6. Documentation API</h2>
+    
+    <div class="info-box">
+        <strong>Base URL :</strong> <code>http://localhost:5000/api</code><br>
+        <strong>Authentification :</strong> Header <code>x-api-key</code> requis pour toutes les requêtes
+    </div>
+    
+    <h3>Endpoints Catégories</h3>
+    
+    <table>
+        <tr>
+            <th>Méthode</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GET</span></td>
+            <td>/api/categories</td>
+            <td>Liste toutes les catégories avec leurs spécialités</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GET</span></td>
+            <td>/api/categories/:slug</td>
+            <td>Détails d'une catégorie par son slug</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GET</span></td>
+            <td>/api/categories/:slug/artisans</td>
+            <td>Liste des artisans d'une catégorie</td>
+        </tr>
+    </table>
+    
+    <h4>Exemple de réponse : GET /api/categories</h4>
+    <pre>
+{
+  "success": true,
+  "count": 4,
+  "data": [
+    {
+      "id": 1,
+      "nom": "Bâtiment",
+      "slug": "batiment",
+      "specialites": [
+        { "id": 1, "nom": "Chauffagiste" },
+        { "id": 2, "nom": "Electricien" }
+      ]
+    }
+  ]
+}
+    </pre>
+    
+    <h3>Endpoints Artisans</h3>
+    
+    <table>
+        <tr>
+            <th>Méthode</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GET</span></td>
+            <td>/api/artisans</td>
+            <td>Liste tous les artisans</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GET</span></td>
+            <td>/api/artisans/top</td>
+            <td>Liste les artisans du mois (top_artisan = true)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GET</span></td>
+            <td>/api/artisans/search?q=query</td>
+            <td>Recherche d'artisans par nom</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GET</span></td>
+            <td>/api/artisans/:id</td>
+            <td>Détails d'un artisan par son ID</td>
+        </tr>
+    </table>
+    
+    <h3>Endpoint Contact</h3>
+    
+    <table>
+        <tr>
+            <th>Méthode</th>
+            <th>Endpoint</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><span class="badge badge-blue">POST</span></td>
+            <td>/api/contact</td>
+            <td>Envoie un email à un artisan</td>
+        </tr>
+    </table>
+    
+    <h4>Corps de la requête POST /api/contact</h4>
+    <pre>
+{
+  "artisanId": 1,
+  "nom": "Jean Dupont",
+  "email": "jean.dupont@email.fr",
+  "sujet": "Demande de devis",
+  "message": "Bonjour, je souhaite..."
+}
+    </pre>
+
+    <div class="page-break"></div>
+
+    <!-- 7. Installation -->
+    <h2 id="installation">7. Guide d'installation</h2>
+    
+    <h3>Prérequis</h3>
+    <ul>
+        <li><strong>Node.js</strong> version 18 ou supérieure</li>
+        <li><strong>npm</strong> (inclus avec Node.js)</li>
+        <li><strong>MySQL</strong> version 8.0 ou supérieure</li>
+        <li><strong>Git</strong></li>
+    </ul>
+    
+    <h3>Étapes d'installation</h3>
+    
+    <h4>1. Cloner le repository</h4>
+    <pre>
+git clone https://github.com/votre-username/trouve-ton-artisan.git
+cd trouve-ton-artisan
+    </pre>
+    
+    <h4>2. Installer les dépendances</h4>
+    <pre>
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd ../frontend
+npm install
+    </pre>
+    
+    <h4>3. Configurer la base de données</h4>
+    <pre>
+# Se connecter à MySQL et exécuter les scripts
+mysql -u root -p
+
+SOURCE backend/scripts/sql/create_database.sql;
+SOURCE backend/scripts/sql/seed_database.sql;
+    </pre>
+    
+    <h4>4. Configurer les variables d'environnement</h4>
+    <p>Créer un fichier <code>.env</code> dans le dossier backend :</p>
+    <pre>
+PORT=5000
+NODE_ENV=development
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=trouve_ton_artisan
+DB_USER=root
+DB_PASSWORD=votre_mot_de_passe
+FRONTEND_URL=http://localhost:3001
+API_KEY=votre_cle_api_secrete
+    </pre>
+    
+    <p>Créer un fichier <code>.env</code> dans le dossier frontend :</p>
+    <pre>
+REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_KEY=votre_cle_api_secrete
+REACT_APP_SITE_NAME=Trouve ton artisan
+    </pre>
+    
+    <h4>5. Lancer l'application</h4>
+    <pre>
+# Terminal 1 - Backend
+cd backend
+npm run dev
+
+# Terminal 2 - Frontend
+cd frontend
+npm start
+    </pre>
+    
+    <div class="success-box">
+        <strong>✓ Application accessible sur :</strong><br>
+        Frontend : <code>http://localhost:3001</code><br>
+        Backend API : <code>http://localhost:5000/api</code>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 8. Sécurité -->
+    <h2 id="securite">8. Sécurité</h2>
+    
+    <h3>Mesures de sécurité implémentées</h3>
+    
+    <table>
+        <tr>
+            <th>Mesure</th>
+            <th>Outil/Méthode</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Headers HTTP sécurisés</td>
+            <td>Helmet.js</td>
+            <td>Protection contre clickjacking, XSS, sniffing MIME, etc.</td>
+        </tr>
+        <tr>
+            <td>CORS</td>
+            <td>cors middleware</td>
+            <td>Restriction des origines autorisées</td>
+        </tr>
+        <tr>
+            <td>Rate Limiting</td>
+            <td>express-rate-limit</td>
+            <td>100 requêtes max par IP toutes les 15 minutes</td>
+        </tr>
+        <tr>
+            <td>Validation des entrées</td>
+            <td>express-validator</td>
+            <td>Validation et sanitization de toutes les entrées</td>
+        </tr>
+        <tr>
+            <td>Protection XSS</td>
+            <td>xss library</td>
+            <td>Échappement des caractères dangereux</td>
+        </tr>
+        <tr>
+            <td>Protection SQL Injection</td>
+            <td>Sequelize ORM</td>
+            <td>Requêtes préparées automatiques</td>
+        </tr>
+        <tr>
+            <td>Authentification API</td>
+            <td>API Key</td>
+            <td>Clé secrète requise dans les headers</td>
+        </tr>
+    </table>
+    
+    <h3>Bonnes pratiques</h3>
+    <ul>
+        <li>Variables d'environnement pour les données sensibles</li>
+        <li>Fichiers <code>.env</code> exclus du versioning Git</li>
+        <li>HTTPS obligatoire en production</li>
+        <li>Mots de passe jamais stockés en clair</li>
+    </ul>
+
+    <!-- 9. Accessibilité -->
+    <h2 id="accessibilite">9. Accessibilité (WCAG 2.1)</h2>
+    
+    <h3>Critères respectés</h3>
+    
+    <table>
+        <tr>
+            <th>Critère</th>
+            <th>Description</th>
+            <th>Implémentation</th>
+        </tr>
+        <tr>
+            <td>Navigation au clavier</td>
+            <td>Tous les éléments interactifs accessibles au clavier</td>
+            <td>Focus visible, tabindex appropriés</td>
+        </tr>
+        <tr>
+            <td>Labels des formulaires</td>
+            <td>Tous les champs ont un label associé</td>
+            <td>Attributs for/id, aria-label</td>
+        </tr>
+        <tr>
+            <td>Contrastes</td>
+            <td>Ratio de contraste suffisant</td>
+            <td>Couleurs conformes WCAG AA</td>
+        </tr>
+        <tr>
+            <td>Alternatives textuelles</td>
+            <td>Images avec attribut alt</td>
+            <td>Alt descriptifs ou décoratifs</td>
+        </tr>
+        <tr>
+            <td>Structure sémantique</td>
+            <td>Hiérarchie des titres</td>
+            <td>h1 > h2 > h3 logique</td>
+        </tr>
+        <tr>
+            <td>Rôles ARIA</td>
+            <td>Landmarks et rôles</td>
+            <td>role="banner", "navigation", "main"</td>
+        </tr>
+        <tr>
+            <td>Skip links</td>
+            <td>Lien d'accès rapide au contenu</td>
+            <td>Classe .visually-hidden</td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- 10. Déploiement -->
+    <h2 id="deploiement">10. Déploiement</h2>
+    
+    <h3>Options de déploiement</h3>
+    
+    <h4>Frontend (React)</h4>
+    <ul>
+        <li><strong>Vercel</strong> : Déploiement automatique depuis GitHub</li>
+        <li><strong>Netlify</strong> : Build automatique et CDN global</li>
+        <li><strong>GitHub Pages</strong> : Hébergement gratuit</li>
+    </ul>
+    
+    <h4>Backend (Node.js)</h4>
+    <ul>
+        <li><strong>Heroku</strong> : PaaS simple avec add-on MySQL</li>
+        <li><strong>Railway</strong> : Déploiement moderne avec base de données intégrée</li>
+        <li><strong>DigitalOcean App Platform</strong> : Infrastructure scalable</li>
+        <li><strong>VPS</strong> : Serveur dédié avec PM2</li>
+    </ul>
+    
+    <h4>Base de données</h4>
+    <ul>
+        <li><strong>PlanetScale</strong> : MySQL serverless</li>
+        <li><strong>AWS RDS</strong> : MySQL managé</li>
+        <li><strong>ClearDB</strong> : Add-on Heroku</li>
+    </ul>
+    
+    <h3>Commandes de build</h3>
+    <pre>
+# Build du frontend pour la production
+cd frontend
+npm run build
+
+# Le dossier 'build' contient les fichiers statiques à déployer
+    </pre>
+    
+    <h3>Variables d'environnement en production</h3>
+    <div class="warning-box">
+        <strong>Important :</strong> En production, assurez-vous de :
+        <ul>
+            <li>Utiliser une clé API complexe et unique</li>
+            <li>Configurer HTTPS</li>
+            <li>Définir NODE_ENV=production</li>
+            <li>Utiliser un service SMTP fiable pour les emails</li>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>Trouve ton artisan</strong> - Documentation Technique</p>
+        <p>Région Auvergne-Rhône-Alpes © 2026</p>
+        <p>Version 1.0.0 - Janvier 2026</p>
+    </div>
+
+</body>
+</html>
