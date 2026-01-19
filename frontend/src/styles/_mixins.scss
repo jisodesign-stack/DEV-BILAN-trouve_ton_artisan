@@ -152,6 +152,10 @@
   box-shadow: $card-shadow;
   transition: $transition-base;
   overflow: hidden;
+  // Fix flickering
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /// Card avec effet hover

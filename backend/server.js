@@ -122,11 +122,12 @@ const startServer = async () => {
       console.log('📦 Modèles synchronisés avec la base de données');
     }
     
-    // Démarrage du serveur
-    app.listen(PORT, () => {
+    // Démarrage du serveur - écoute sur 0.0.0.0 pour Railway
+    const HOST = '0.0.0.0';
+    app.listen(PORT, HOST, () => {
       console.log(`🚀 Serveur démarré sur le port ${PORT}`);
       console.log(`📍 Mode: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`🔗 URL: http://localhost:${PORT}`);
+      console.log(`🔗 URL: http://${HOST}:${PORT}`);
     });
   } catch (error) {
     console.error('❌ Impossible de démarrer le serveur:', error);

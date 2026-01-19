@@ -7,7 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { FiMapPin, FiExternalLink, FiCheck } from 'react-icons/fi';
+import { FiMapPin, FiExternalLink, FiCheck, FiUser } from 'react-icons/fi';
 
 // Composants
 import { StarRating, Loader } from '../components/common';
@@ -162,11 +162,6 @@ function ArtisanDetailPage() {
     );
   }
 
-  // URL de l'image
-  const imageUrl = artisan.image && artisan.image !== 'default-artisan.jpg'
-    ? `${process.env.REACT_APP_API_URL?.replace('/api', '')}/uploads/${artisan.image}`
-    : '/images/default-artisan.jpg';
-
   // Informations de la spécialité et catégorie
   const specialiteName = artisan.specialite?.nom || 'Artisan';
   const categorieName = artisan.specialite?.categorie?.nom || '';
@@ -218,14 +213,10 @@ function ArtisanDetailPage() {
               {/* Header */}
               <header className="artisan-detail__header">
                 <div className="artisan-detail__image-wrapper">
-                  <img
-                    src={imageUrl}
-                    alt={artisan.nom}
-                    className="artisan-detail__image"
-                    onError={(e) => {
-                      e.target.src = '/images/default-artisan.jpg';
-                    }}
-                  />
+                  <div className="artisan-detail__placeholder">
+                    <FiUser className="artisan-detail__placeholder-icon" aria-hidden="true" />
+                    <span className="artisan-detail__placeholder-text">Photo à venir</span>
+                  </div>
                 </div>
                 
                 <div className="artisan-detail__info">

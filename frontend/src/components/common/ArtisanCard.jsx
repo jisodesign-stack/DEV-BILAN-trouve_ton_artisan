@@ -4,9 +4,9 @@
  * @module components/common/ArtisanCard
  */
 
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { FiMapPin } from 'react-icons/fi';
+import { FiMapPin, FiUser } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import './ArtisanCard.scss';
@@ -64,14 +64,8 @@ function ArtisanCard({ artisan }) {
     nom,
     note,
     localisation,
-    image,
     specialite
   } = artisan;
-
-  // URL de l'image avec fallback
-  const imageUrl = image && image !== 'default-artisan.jpg'
-    ? `${process.env.REACT_APP_API_URL?.replace('/api', '')}/uploads/${image}`
-    : '/images/default-artisan.jpg';
 
   // Nom de la spécialité
   const specialiteName = specialite?.nom || 'Artisan';
@@ -85,17 +79,12 @@ function ArtisanCard({ artisan }) {
       className="artisan-card"
       aria-label={`Voir la fiche de ${nom}, ${specialiteName} à ${localisation}`}
     >
-      {/* Image */}
+      {/* Placeholder Image */}
       <div className="artisan-card__image-wrapper">
-        <img
-          src={imageUrl}
-          alt=""
-          className="artisan-card__image"
-          loading="lazy"
-          onError={(e) => {
-            e.target.src = '/images/default-artisan.jpg';
-          }}
-        />
+        <div className="artisan-card__placeholder">
+          <FiUser className="artisan-card__placeholder-icon" aria-hidden="true" />
+          <span className="artisan-card__placeholder-text">Photo à venir</span>
+        </div>
         {categorieName && (
           <span className="artisan-card__badge">{categorieName}</span>
         )}
@@ -145,4 +134,4 @@ ArtisanCard.propTypes = {
   }).isRequired
 };
 
-export default ArtisanCard;
+export default memo(ArtisanCard);

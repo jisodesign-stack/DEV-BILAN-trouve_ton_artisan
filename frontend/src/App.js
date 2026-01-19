@@ -4,7 +4,7 @@
  * @module App
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Composants de layout
@@ -61,28 +61,30 @@ function App() {
 
       {/* Contenu principal */}
       <main id="main-content" role="main">
-        <Routes>
-          {/* Page d'accueil */}
-          <Route path="/" element={<HomePage />} />
+        {useMemo(() => (
+          <Routes>
+            {/* Page d'accueil */}
+            <Route path="/" element={<HomePage />} />
 
-          {/* Liste des artisans par catégorie */}
-          <Route path="/categorie/:slug" element={<ArtisansListPage />} />
+            {/* Liste des artisans par catégorie */}
+            <Route path="/categorie/:slug" element={<ArtisansListPage />} />
 
-          {/* Recherche d'artisans */}
-          <Route path="/recherche" element={<ArtisansListPage />} />
+            {/* Recherche d'artisans */}
+            <Route path="/recherche" element={<ArtisansListPage />} />
 
-          {/* Fiche artisan */}
-          <Route path="/artisan/:id" element={<ArtisanDetailPage />} />
+            {/* Fiche artisan */}
+            <Route path="/artisan/:id" element={<ArtisanDetailPage />} />
 
-          {/* Pages légales */}
-          <Route path="/mentions-legales" element={<LegalPage type="mentions" />} />
-          <Route path="/donnees-personnelles" element={<LegalPage type="donnees" />} />
-          <Route path="/accessibilite" element={<LegalPage type="accessibilite" />} />
-          <Route path="/cookies" element={<LegalPage type="cookies" />} />
+            {/* Pages légales */}
+            <Route path="/mentions-legales" element={<LegalPage type="mentions" />} />
+            <Route path="/donnees-personnelles" element={<LegalPage type="donnees" />} />
+            <Route path="/accessibilite" element={<LegalPage type="accessibilite" />} />
+            <Route path="/cookies" element={<LegalPage type="cookies" />} />
 
-          {/* Page 404 */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+            {/* Page 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        ), [])}
       </main>
 
       {/* Footer */}

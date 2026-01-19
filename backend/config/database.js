@@ -17,7 +17,9 @@ const sequelize = new Sequelize(
     dialect: 'mysql',
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
     dialectOptions: {
-      charset: 'utf8mb4'
+      charset: 'utf8mb4',
+      // SSL pour les BDD cloud (Railway utilise des certificats auto-signés)
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
     },
     pool: {
       max: 5,

@@ -1,25 +1,31 @@
-# Trouve ton artisan - Auvergne-Rhone-Alpes
+# Trouve ton artisan - Auvergne-Rhône-Alpes
 
-Plateforme web permettant aux particuliers de trouver et contacter des artisans qualifies en region Auvergne-Rhone-Alpes.
+Plateforme web permettant aux particuliers de trouver et contacter des artisans qualifiés en région Auvergne-Rhône-Alpes.
 
-## Technologies
+## 🌐 Démo en ligne
+
+- **Frontend** : https://trouve-ton-artisan.up.railway.app
+- **Backend API** : https://dev-bilan-trouvetonartisan-production.up.railway.app/api
+
+## 🛠 Technologies
 
 - **Frontend** : React 18.2, React Router 6, Bootstrap 5.3, Sass
 - **Backend** : Node.js 18+, Express 4.18, Sequelize 6.35
-- **Base de donnees** : MySQL 9.5
+- **Base de données** : MySQL 9.5
+- **Hébergement** : Railway
 
-## Prerequis
+## 📋 Prérequis
 
 - Node.js 18+
 - MySQL 9.5
 - Git
 
-## Installation
+## 🚀 Installation
 
 ```bash
 # Cloner le repository
-git clone https://github.com/jisodesign-stack/trouve-ton-artisan.git
-cd trouve-ton-artisan
+git clone https://github.com/jisodesign-stack/DEV-BILAN-trouve_ton_artisan.git
+cd DEV-BILAN-trouve_ton_artisan
 
 # Backend
 cd backend
@@ -32,7 +38,7 @@ npm install
 cp .env.example .env  # Configurer les variables
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 ### Backend (.env)
 
@@ -51,12 +57,11 @@ API_KEY=votre_cle_api
 ### Frontend (.env)
 
 ```env
-PORT=3001
 REACT_APP_API_URL=http://localhost:5000/api
 REACT_APP_API_KEY=votre_cle_api
 ```
 
-### Base de donnees
+### Base de données
 
 ```bash
 cd backend
@@ -64,7 +69,7 @@ mysql -u root -p < scripts/sql/create_database.sql
 mysql -u root -p < scripts/sql/seed_database.sql
 ```
 
-## Lancement
+## ▶️ Lancement
 
 ```bash
 # Terminal 1 - Backend
@@ -78,7 +83,7 @@ npm start
 # App sur http://localhost:3001
 ```
 
-## Structure du projet
+## 📁 Structure du projet
 
 ```
 trouve-ton-artisan/
@@ -100,31 +105,31 @@ trouve-ton-artisan/
 └── README.md
 ```
 
-## API Endpoints
+## 📡 API Endpoints
 
-| Methode | Endpoint | Description |
+| Méthode | Endpoint | Description |
 |---------|----------|-------------|
-| GET | /api/categories | Liste des categories |
-| GET | /api/categories/:slug/artisans | Artisans par categorie |
+| GET | /api/categories | Liste des catégories |
+| GET | /api/categories/:slug/artisans | Artisans par catégorie |
 | GET | /api/artisans | Liste des artisans |
-| GET | /api/artisans/:id | Detail artisan |
+| GET | /api/artisans/:id | Détail artisan |
 | GET | /api/artisans/top | Top 3 artisans |
 | GET | /api/artisans/search?q= | Recherche |
 | POST | /api/contact | Envoyer un message |
 
-**Authentification** : Header `x-api-key` requis sur toutes les requetes.
+**Authentification** : Header `x-api-key` requis sur toutes les requêtes.
 
-## Securite
+## 🔒 Sécurité
 
-- Validation des entrees (express-validator)
+- Validation des entrées (express-validator)
 - Protection XSS (Helmet)
 - Protection SQL Injection (Sequelize ORM)
 - Rate Limiting
-- CORS configure
-- Cle API obligatoire
+- CORS configuré
+- Clé API obligatoire
 
-## Auteur
+## 👤 Auteur
 
-Developpe dans le cadre du titre professionnel Developpeur Web.
+Développé dans le cadre du titre professionnel Développeur Web.
 
 ---

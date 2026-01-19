@@ -68,7 +68,6 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const [artisansResponse, categoriesResponse] = await Promise.all([
           getTopArtisans(),
           getCategories()
