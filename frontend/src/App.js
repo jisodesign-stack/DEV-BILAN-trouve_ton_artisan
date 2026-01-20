@@ -51,11 +51,6 @@ function App() {
 
   return (
     <>
-      {/* Lien d'évitement pour l'accessibilité */}
-      <a href="#main-content" className="skip-link">
-        Aller au contenu principal
-      </a>
-
       {/* Header avec menu dynamique */}
       <Header categories={categories} loading={loading} />
 
