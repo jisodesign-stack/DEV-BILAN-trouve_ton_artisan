@@ -2,14 +2,12 @@
 
 Plateforme web permettant aux particuliers de trouver et contacter des artisans qualifiés en région Auvergne-Rhône-Alpes.
 
-## � Maquettes Figma
+## Démo en ligne
 
-[Voir les maquettes sur Figma](https://www.figma.com/design/cIWMzWMWhwhUYBmtgqdak6/DEV-Trouve-ton-artisan)
+[https://trouve-ton-artisan.up.railway.app](https://trouve-ton-artisan.up.railway.app/)
 
 ## Technologies
 
-| Couche | Technologies |
-|--------|-------------|
 | **Frontend** | React 18.2, React Router 6.20, Bootstrap 5.3, Sass, Axios |
 | **Backend** | Node.js 18+, Express 4.18, Sequelize 6.35 |
 | **Base de données** | MySQL 8.0+ |
@@ -135,8 +133,7 @@ trouve-ton-artisan/
 - Labels de formulaires associés
 - Contrastes conformes WCAG AA
 - Attributs alt sur les images
-- Structure sémantique h1 > h2 > h3
-- Landmarks ARIA
+- Structure sémantique
 
 ## Auteur
 
